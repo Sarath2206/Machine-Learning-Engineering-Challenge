@@ -15,7 +15,7 @@ def preprocess_image(image):
     image = image.resize((32, 32))  # Resize image to match CIFAR-10 dataset
     image = np.array(image)
     # Normalize pixel values
-    image = (image - 127.5) / 127.5
+    image  = image.astype('float32') / 255.0
     return image
 
 # Function to classify the image
