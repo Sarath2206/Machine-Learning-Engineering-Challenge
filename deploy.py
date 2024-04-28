@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pickle
 from PIL import Image
-import tensorflow as tf
+from keras.models import load_model
 
 # Function to load the CNN model from .pkl file
 def load_model(model_path):
@@ -26,10 +26,6 @@ def classify_image(image, model):
     class_index = np.argmax(prediction)
     return class_index
 
-# Load pre-trained model
-picklefile = open('model.pkl', 'rb')
-model = pickle.load(picklefile)
-
 # Main function to create the Streamlit web application
 def main():
     st.sidebar.title("Navigation")
@@ -40,7 +36,6 @@ def main():
         st.write("Please select the 'Predict' page from the sidebar to classify an image.")
     elif page == "Predict":
         st.title("CIFAR-10 Image Classifier")
-        
 
         # Upload image
         uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
