@@ -26,6 +26,10 @@ def classify_image(image, model):
     class_index = np.argmax(prediction)
     return class_index
 
+# Load pre-trained model
+picklefile = open('model.pkl', 'rb')
+model = pickle.load(picklefile)
+
 # Main function to create the Streamlit web application
 def main():
     st.sidebar.title("Navigation")
@@ -36,10 +40,7 @@ def main():
         st.write("Please select the 'Predict' page from the sidebar to classify an image.")
     elif page == "Predict":
         st.title("CIFAR-10 Image Classifier")
-
-        # Load pre-trained model
-        model_path = "IISC\model-CIFAR10.pkl"  # Replace with your model path
-        model = load_model(model_path)
+        
 
         # Upload image
         uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
